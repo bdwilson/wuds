@@ -155,7 +155,8 @@ def packet_handler(pkt):
         if on_premises and LOG_LEVEL == 2: log_probe(*data)
 	if (dashnotify):
             call_alerts(bssid=bssid, rssi=rssi, essid=essid, oui=resolve_oui(bssid), bssid_name=bssid_name, dash=True)
-        if ((foreign and on_premises) or (on_premises and notify)):
+        #if ((foreign and on_premises) or (on_premises and notify)):
+        if ((foreign and on_premises) or (notify)):
 	    THRESHOLD = ALERT_THRESHOLD
 	    if (notify):
 		THRESHOLD = NOTIFY_THRESHOLD

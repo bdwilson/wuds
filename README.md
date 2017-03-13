@@ -7,11 +7,10 @@ the Raspberry Pi in mind, WUDS can be installed and configured on any system
 with Python 2.x and a wireless card capable of Monitor mode. Credit goes to 
 [http://www.lanmaster53.com/2014/10/wifi-user-detection-system/](http://www.lanmaster53.com/2014/10/wifi-user-detection-system/)
 for the initial code. This version adds Pushover alerts, "always notify" for
-certain MAC addrs. 
+certain MAC addrs regardless of their signal strength.
 
 You will also need a wireless device that supports
-[http://raspberrypi.stackexchange.com/questions/36747/enable-monitoring-mode-for-rtl8188cus-via-usb-on-raspbian#37970](monitor
-mode).
+[monitor mode](http://raspberrypi.stackexchange.com/questions/36747/enable-monitoring-mode-for-rtl8188cus-via-usb-on-raspbian#37970).
 
 ## Setup
 
