@@ -1,0 +1,95 @@
+#! /bin/sh
+
+### BEGIN INIT INFO
+# Provides:          WUDS
+# Required-Start:    $all
+# Required-Stop:     $all
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: starts instance of WUDS
+# Description:       starts instance of WUDS start-stop-daemon
+### END INIT INFO
+
+############### EDIT ME ##################
+# path to app
+APP_PATH=/home/pi/wuds
+
+# path to bash bin
+DAEMON=run.sh
+
+# child process to terminate
+CHILD=core.py
+
+# script name
+NAME=wuds
+
+# app name
+DESC=WUDS
+
+# user
+RUN_AS=root
+
+PID_FILE=/var/run/wuds.pid
+
+############### END EDIT ME ##################
+
+test -x $APP_PATH/$DAEMON || exit 0
+
+set -e
+
+start() {
+ 	PID=`ps aux | grep "$CHILD" | grep -v grep | awk '{print $2}'`
+	if [ "x$PID" = "x" ] && [ -f $PID_FILE ]; then
+	    rm $PID_FILE
+        elif [ "x$PID" != "x" ]; then 
+	    echo "$DESC appears to already be running"
+	    exit
+	fi
+        echo "Starting $DESC"
+        start-stop-daemon -d $APP_PATH -c $RUN_AS --start --background --pidfile $PID_FILE --make-pidfile --exec /bin/bash -- $DAEMON
+	    
+}
+
+stop() {
+	PID=`ps aux | grep "$CHILD" | grep -v grep | awk '{print $2}'`
+        if [ "x$PID" != "x" ]; then
+            echo "Stopping $DESC"
+	    kill $PID
+	elif [ "x$PID" = "x" ]; then
+	    echo "$DESC does not appear to be running"
+	    exit;
+        fi
+}
+status() {
+	PID=`ps aux | grep "$CHILD" | grep -v grep | awk '{print $2}'`
+	if [ "x$PID" = "x" ]; then
+	    echo "$DESC does not appear to be running"
+	else 
+	    echo "$DESC is running"
+	fi
+}
+
+case "$1" in
+  start)
+	start
+        ;;
+  stop)
+	stop
+        ;;
+
+  status)
+	status
+	;;
+
+  restart|force-reload)
+	stop
+	start
+        ;;
+  *)
+        N=/etc/init.d/$NAME
+        echo "Usage: $N {start|stop|restart|force-reload|status}" >&2
+        exit 1
+        ;;
+esac
+
+exit 0
