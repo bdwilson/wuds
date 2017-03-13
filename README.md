@@ -41,4 +41,5 @@ Make sure you adjust your wireless device in run.sh as well.
 * config.py - configuration file
 * core.py - core library
 * run.sh - startup script
+* wuds.init - init script to run on boot (expects the wuds directory to be in /home/pi)
 * README.py - this file
