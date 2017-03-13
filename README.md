@@ -13,7 +13,7 @@ You will also need a wireless device that supports
 [monitor mode](http://raspberrypi.stackexchange.com/questions/36747/enable-monitoring-mode-for-rtl8188cus-via-usb-on-raspbian#37970).
 
 ## Pushover Alert
-!(https://dl.dropboxusercontent.com/u/853747/WUDS_Pushover.jpg)
+![Pushover Alert](https://dl.dropboxusercontent.com/u/853747/WUDS_Pushover.jpg)
 
 ## Setup
 
